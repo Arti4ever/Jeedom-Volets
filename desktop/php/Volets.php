@@ -15,7 +15,7 @@ $eqLogics = eqLogic::byType('Volets');
 				<a class="btn btn-default eqLogicAction" style="width : 50%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 				<?php
-					foreach ($eqLogics as $eqLogic) 
+					foreach ($eqLogics as $eqLogic)
 						echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $eqLogic->getId() . '"><a>' . $eqLogic->getHumanName(true) . '</a></li>';
 				?>
 			</ul>
@@ -24,29 +24,29 @@ $eqLogics = eqLogic::byType('Volets');
 	<div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
 		<legend>{{Gestion}}</legend>
 		<div class="eqLogicThumbnailContainer">
-			<div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
+			<div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 130px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 170px;margin-left : 10px;" >
 				<center>
 					<i class="fa fa-plus-circle" style="font-size : 5em;color:#406E88;"></i>
 				</center>
-				<span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#406E88"><center>{{Ajouter}}</center></span>
+				<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#406E88"><center>{{Ajouter}}</center></span>
 			</div>
-			<div class="cursor eqLogicAction" data-action="gotoPluginConf" style="height: 120px; margin-bottom: 10px; padding: 5px; border-radius: 2px; width: 160px; margin-left: 10px; position: absolute; left: 170px; top: 0px; background-color: rgb(255, 255, 255);">
+			<div class="cursor eqLogicAction" data-action="gotoPluginConf" style="height: 130px; margin-bottom: 10px; padding: 5px; border-radius: 2px; width: 170px; margin-left: 10px; position: absolute; left: 170px; top: 0px; background-color: rgb(255, 255, 255);">
 				    <center>
 			      		<i class="fa fa-wrench" style="font-size : 5em;color:#767676;"></i>
 			    	</center>
 			    	<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>Configuration</center></span>
 			</div>
-			<div class="cursor bt_showExpressionTest" style="height: 120px; margin-bottom: 10px; padding: 5px; border-radius: 2px; width: 160px; margin-left: 10px; position: absolute; left: 170px; top: 0px; background-color: rgb(255, 255, 255);">
+			<div class="cursor bt_showExpressionTest" style="height: 130px; margin-bottom: 10px; padding: 5px; border-radius: 2px; width: 170px; margin-left: 10px; position: absolute; left: 170px; top: 0px; background-color: rgb(255, 255, 255);">
 				  <center>
 			      		<i class="fa fa-check" style="font-size : 5em;color:#767676;"></i>
 			    </center>
-			    <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>Testeur d'expressions</center></span>
+			    <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>Testeur d'expression</center></span>
 			</div>
 		</div>
 		<legend>{{Mes zones}}</legend>
 		<input class="form-control" placeholder="{{Rechercher}}" style="margin-bottom:4px;" id="in_searchEqlogic" />
 		<div class="eqLogicThumbnailContainer">
-			<?php	
+			<?php
 			if (count($eqLogics) == 0) {
 				echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore de zones, cliquez sur Ajouter pour commencer}}</span></center>";
 			} else {
@@ -59,10 +59,10 @@ $eqLogics = eqLogic::byType('Volets');
 					echo '<span class="name" style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
 					echo '</div>';
 				}
-			} 
+			}
 			?>
 		</div>
-	</div>  
+	</div>
 	<div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
 		<a class="btn btn-success btn-sm eqLogicAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> Sauvegarder</a>
 		<a class="btn btn-danger btn-sm eqLogicAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> Supprimer</a>
@@ -133,7 +133,7 @@ $eqLogics = eqLogic::byType('Volets');
 								<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 									<option value="">{{Aucun}}</option>
 									<?php
-										foreach (object::all() as $object) 
+										foreach (object::all() as $object)
 											echo '<option value="' . $object->getId() . '">' . $object->getName() . '</option>';
 									?>
 								</select>
@@ -203,7 +203,7 @@ $eqLogics = eqLogic::byType('Volets');
 									}
 								?>
 							</div>
-						</div>	
+						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">{{Objet état réel}}
 								<sup>
@@ -220,7 +220,7 @@ $eqLogics = eqLogic::byType('Volets');
 									</span>
 								</div>
 							</div>
-						</div>	
+						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">{{Hauteur de fermeture}}
 								<sup>
@@ -232,7 +232,7 @@ $eqLogics = eqLogic::byType('Volets');
 									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="SeuilRealState" placeholder="{{0 si binaire}}"/>
 								</div>
 							</div>
-						</div>	
+						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">{{Hauteur calculée}}
 								<sup>
@@ -243,15 +243,15 @@ $eqLogics = eqLogic::byType('Volets');
 								<label>{{Inverser}}</label>
 								<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="InverseHauteur"/>
 							</div>
-						</div>	
+						</div>
 					</fieldset>
 				</form>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="presentab">
 				<form class="form-horizontal">
 					<fieldset>
-						{{La gestion d'absence va fermer le volet lorsque l'objet de présence surveillé passe à False.}}	
-						{{Seule la gestion de Nuit est autorisée à s'exécuter}}	
+						{{La gestion d'absence va fermer le volet lorsque l'objet de présence surveillé passe à False.}}
+						{{Seule la gestion de Nuit est autorisée à s'exécuter}}
 						<div class="form-group">
 							<label class="col-sm-2 control-label">{{Objet indiquant la présence}}
 								<sup>
@@ -271,16 +271,16 @@ $eqLogics = eqLogic::byType('Volets');
 									</span>
 								</div>
 							</div>
-						</div>	
+						</div>
 					</fieldset>
 				</form>
 			</div>
 		<div role="tabpanel" class="tab-pane" id="meteotab">
 				<form class="form-horizontal">
 					<fieldset>
-						{{La gestion par météo est une tâche executée toutes les minutes qui va verifier les conditions météorologique que vous avez spécifées dans l'onget Condition}}	
+						{{La gestion par météo est une tâche executée toutes les minutes qui va verifier les conditions météorologique que vous avez spécifées dans l'onget Condition}}
 						{{Lorsque toutes les conditions sont vérifiées le plugin passe en mode Météo, les volets se ferment}}
-						{{Seule la gestion de Nuit est autorisée à s'exécuter}}		
+						{{Seule la gestion de Nuit est autorisée à s'exécuter}}
 					</fieldset>
 				</form>
 			</div>
@@ -298,7 +298,7 @@ $eqLogics = eqLogic::byType('Volets');
 								<div class="col-sm-5">
 									<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="RandExecution"/>
 								</div>
-							</div>	
+							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">{{Délai maximal du mode aléatoire (s)}}
 									<sup>
@@ -308,7 +308,7 @@ $eqLogics = eqLogic::byType('Volets');
 								<div class="col-sm-5">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="maxDelaiRand" placeholder="{{Temps d'attente aléatoire entre deux commandes de volet (s)}}"/>
 								</div>
-							</div>	
+							</div>
 						</fieldset>
 					</form>
 				</div>
@@ -395,8 +395,8 @@ $eqLogics = eqLogic::byType('Volets');
 							</div>
 						</fieldset>
 					</form>
-				</div>	
-			</div>	
+				</div>
+			</div>
 			<div role="tabpanel" class="tab-pane" id="azimutab">
 				<form class="form-horizontal">
 					<fieldset>
@@ -412,13 +412,13 @@ $eqLogics = eqLogic::byType('Volets');
 							<div class="col-sm-3">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="AngleGauche" disabled />
 							</div>
-						</div>  
+						</div>
 						<input type="hidden" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="Droite"/>
 						<input type="hidden" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="Centre"/>
 						<input type="hidden" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="Gauche"/>
 					</fieldset>
 				</form>
-			</div>				
+			</div>
 			<div role="tabpanel" class="tab-pane" id="conditiontab">
 				<form class="form-horizontal">
 					<fieldset>
@@ -432,7 +432,7 @@ $eqLogics = eqLogic::byType('Volets');
 							</a>
 						</legend>
 					</fieldset>
-				</form>			
+				</form>
 				<table id="table_condition" class="table table-bordered table-condensed">
 					<thead>
 						<tr>
@@ -475,7 +475,7 @@ $eqLogics = eqLogic::byType('Volets');
 					</thead>
 					<tbody></tbody>
 				</table>
-			</div>				
+			</div>
 			<div role="tabpanel" class="tab-pane" id="actiontab">
 				<form class="form-horizontal">
 					<fieldset>
@@ -489,7 +489,7 @@ $eqLogics = eqLogic::byType('Volets');
 							</a>
 						</legend>
 					</fieldset>
-				</form>					
+				</form>
 				<table id="table_action" class="table table-bordered table-condensed">
 					<thead>
 						<tr>
@@ -527,8 +527,8 @@ $eqLogics = eqLogic::byType('Volets');
 					</thead>
 					<tbody></tbody>
 				</table>
-			</div>		
-			<div role="tabpanel" class="tab-pane" id="commandtab">	
+			</div>
+			<div role="tabpanel" class="tab-pane" id="commandtab">
 				<table id="table_cmd" class="table table-bordered table-condensed">
 					<thead>
 					<tr>
@@ -539,7 +539,7 @@ $eqLogics = eqLogic::byType('Volets');
 					</thead>
 					<tbody></tbody>
 				</table>
-			</div>	
+			</div>
 		</div>
 	</div>
 </div>

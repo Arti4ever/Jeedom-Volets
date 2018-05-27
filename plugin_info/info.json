@@ -3,11 +3,11 @@
 	"name" : "Gestion de Volets",
 	"description" : "Ce plugin gère l'ouverture et la fermeture de nos volets",
 	"licence" : "AGPL",
-	"author" : "Halbout Michael",
+	"author" : "Arti4ever",
 	"require" : "2.4",
 	"category" : "automatisation",
 	"hasOwnDeamon" : true,
-	"issue" : "https://github.com/mika-nt28/Jeedom-Volets/issues",
- 	"changelog" : "https://github.com/mika-nt28/Jeedom-Volets/commits/master",
- 	"documentation" : "https://mika-nt28.github.io/Jeedom-Volets/"
+	"issue" : "https://github.com/arti4ever/Jeedom-Volets/issues",
+ 	"changelog" : "https://github.com/arti4ever/Jeedom-Volets/commits/master",
+ 	"documentation" : "https://arti4ever.github.io/Jeedom-Volets/"
 }

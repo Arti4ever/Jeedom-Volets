@@ -4,7 +4,7 @@ $("#table_action").sortable({axis: "y", cursor: "move", items: ".ActionGroup", p
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=heliotrope]').on('change',function(){
 	if($(this).val() != 'Aucun'){
 		$.ajax({
-			type: 'POST',            
+			type: 'POST',
 			async: false,
 			url: 'plugins/Volets/core/ajax/Volets.ajax.php',
 			data:{
@@ -63,7 +63,7 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key=Jour]').on('change',functio
 	if($(this).is(':checked'))
 		$('.Jour').show();
 	else
-		$('.Jour').hide();	
+		$('.Jour').hide();
 	if($('.eqLogicAttr[data-l1key=configuration][data-l2key=Nuit]').is(':checked') || $(this).is(':checked'))
 		$('.JourNuit').show();
 	else
@@ -79,19 +79,19 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key=Nuit]').on('change',functio
 	else
 		$('.JourNuit').hide();
 });
-$('.eqLogicAttr[data-l1key=configuration][data-l2key=Absent]').on('change',function(){	
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=Absent]').on('change',function(){
 	if($(this).is(':checked'))
 		$('.Absent').show();
 	else
 		$('.Absent').hide();
 });
-$('.eqLogicAttr[data-l1key=configuration][data-l2key=Meteo]').on('change',function(){	
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=Meteo]').on('change',function(){
 	if($(this).is(':checked'))
 		$('.Meteo').show();
 	else
 		$('.Meteo').hide();
 });
-$('.eqLogicAttr[data-l1key=configuration][data-l2key=Azimut]').on('change',function(){	
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=Azimut]').on('change',function(){
 	if($(this).is(':checked')){
 		$('.Azimut').show();
 	}else
@@ -126,18 +126,19 @@ function printEqLogic(_eqLogic) {
 	$('.eqLogicAttr[data-l1key=configuration][data-l2key=Centre]').val(JSON.stringify(_eqLogic.configuration.Centre));
 	$('.eqLogicAttr[data-l1key=configuration][data-l2key=Gauche]').val(JSON.stringify(_eqLogic.configuration.Gauche));
 	if (typeof(_eqLogic.configuration.condition) !== 'undefined') {
-		for(var index in _eqLogic.configuration.condition) { 
+		for(var index in _eqLogic.configuration.condition) {
 			if( (typeof _eqLogic.configuration.condition[index] === "object") && (_eqLogic.configuration.condition[index] !== null) )
 				addCondition(_eqLogic.configuration.condition[index],$('#conditiontab').find('table tbody'));
 		}
 	}
 	if (typeof(_eqLogic.configuration.action) !== 'undefined') {
-			for(var index in _eqLogic.configuration.action) { 
+			for(var index in _eqLogic.configuration.action) {
 				if( (typeof _eqLogic.configuration.action[index] === "object") && (_eqLogic.configuration.action[index] !== null) )
 					addAction(_eqLogic.configuration.action[index],$('#actiontab').find('table tbody'));
 			}
-	}	
+	}
 }
+
 function addCondition(_condition,_el) {
 	var tr = $('<tr class="ConditionGroup">')
 		.append($('<td>')
@@ -168,17 +169,27 @@ function addCondition(_condition,_el) {
 	$('.conditionAttr[data-action=remove]').off().on('click',function(){
 		$(this).closest('tr').remove();
 	});
+	$('.expressionAttr[data-l1key=autoArm]').on('change',function(){
+		if($(this).is(':checked')){
+			$(this).closest('tr').find('select[data-l1key=evaluation]').prop("disabled", true);
+			$(this).closest('tr').find('input[data-l1key=enable]').prop("checked", false);
+			$(this).closest('tr').find('input[data-l1key=enable]').prop("disabled", true);
+		}else{
+			$(this).closest('tr').find('select[data-l1key=evaluation]').prop("disabled", false);
+			$(this).closest('tr').find('input[data-l1key=enable]').prop("disabled", false);
+		}
+	});
 }
 function addAction(_action,  _el) {
 	var tr = $('<tr class="ActionGroup">');
 	tr.append($('<td>')
 		.append($('<label class="checkbox-inline">')
 			.append($('<input type="checkbox" class="expressionAttr" data-l1key="enable">'))
-			.append('{{Activer}}')));		
-	tr.append($('<td>')	
+			.append('{{Activer}}')));
+	tr.append($('<td>')
 		.append($('<label class="checkbox-inline">')
 			.append($('<input type="checkbox" class="expressionAttr" data-l1key="isVoletMove">'))
-			.append('{{Activer}}')));	
+			.append('{{Activer}}')));
 	tr.append($('<td>')
 		.append($('<div class="input-group">')
 			.append($('<span class="input-group-btn">')
@@ -214,7 +225,7 @@ $('.conditionAttr[data-action=add]').off().on('click',function(){
 	addCondition({},$(this).closest('.tab-pane').find('table'));
 });
 $('body').on('click','.listCmdCondition',function(){
-	var el = $(this).closest('tr').find('.expressionAttr[data-l1key=expression]');	
+	var el = $(this).closest('tr').find('.expressionAttr[data-l1key=expression]');
 	jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function (result) {
 		var message = 'Aucun choix possible';
 		if(result.cmd.subType == 'numeric'){
@@ -354,7 +365,7 @@ $("body").on('click', ".listAction", function() {
 			el.closest('.form-group').find('.actionOptions').html(html);
 		});
 	});
-}); 
+});
 $("body").on('click', ".listCmdAction", function() {
 	var el = $(this).closest('.input-group').find('input');
 	var type=$(this).attr('data-type');
@@ -389,7 +400,7 @@ function addCmdToTable(_cmd) {
 					.attr('title','Souhaitez-vous afficher cette commande sur le dashboard ?')))))
 		.append($('<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="minValue" placeholder="{{Min}}" title="{{Min}}" >'))
 		.append($('<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="maxValue" placeholder="{{Max}}" title="{{Max}}" >')));
-	var parmetre=$('<td>');	
+	var parmetre=$('<td>');
 	if (is_numeric(_cmd.id)) {
 		parmetre.append($('<a class="btn btn-default btn-xs cmdAction" data-action="test">')
 			.append($('<i class="fa fa-rss">')
@@ -422,5 +433,5 @@ function addParameters() {
 				.text('{{Fermeture}}'))
 			.append($('<option value="open">')
 				.text('{{Ouverture}}'))));
-	return Parameter.children();		 		
+	return Parameter.children();
 }
