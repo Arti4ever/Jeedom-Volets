@@ -90,7 +90,7 @@ class Volets extends eqLogic {
 						if ($Event->getId() == str_replace('#','',$Volet->getConfiguration('cmdPresent')))
 						{
 							log::add('Volets','info',$Volet->getHumanName().' : Mise à jour de la présence : '.$_option['value']);
-							$Volet->relaunch(); //si changement d'absence, on relance pour rechecker toutes les conditions
+							$Volet->execGestionVolet(); //si changement d'absence, on relance pour rechecker toutes les conditions
 						}
 					break;
 				}
