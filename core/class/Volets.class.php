@@ -120,25 +120,9 @@ class Volets extends eqLogic {
 	{
 		if($this->getCmd(null,'isArmed')->execCmd())
 		{
-			$isPresent = true;
-			if($this->getConfiguration('Absent'))
-			{ //check pour savoir si on est absent avant de lancer
-				$cmd=cmd::byString($this->getConfiguration('cmdPresent'));
-				if(is_object($cmd))
-					$isPresent = $cmd->execCmd();
-				log::add('Volets','info',$this->getHumanName().' : test absent :'.$isPresent);
-			}
-			if(!$isPresent)
-			{ //si absent, on lance la gestion d'absence
-				log::add('Volets','info',$this->getHumanName().' : relaunch mais absent');
-				$this->GestionAbsent();
-			}
-			else
-			{
-				log::add('Volets','info',$this->getHumanName().' : relaunch');
-				$this->checkAndUpdateCmd('gestion','Jour'); //Jour par defaut, le vrai mode sera mis a jour automatiquement
-				$this->execGestionVolet();
-			}
+			log::add('Volets','info',$this->getHumanName().' : relaunch');
+			$this->checkAndUpdateCmd('gestion','Jour'); //Jour par defaut, le vrai mode sera mis a jour automatiquement
+			$this->execGestionVolet();
 		}
 	}
 
@@ -183,10 +167,25 @@ class Volets extends eqLogic {
 			{ //si on est armé et pas en manuel
 				$Jour = cache::byKey('Volets::Jour::'.$this->getId())->getValue(0);
 				$Nuit = cache::byKey('Volets::Nuit::'.$this->getId())->getValue(0);
-				if((mktime() > $Jour) && (mktime() < $Nuit)) //on regarde si on est en jounée ou la nuit
-					$this->GestionJour();
+				if((mktime() > $Jour) && (mktime() < $Nuit)) //on regarde si on est en journée ou la nuit
+				{ // en journée
+					$isPresent = true;
+					if($this->getConfiguration('Absent'))
+					{ //check pour savoir si on est absent
+						$cmd=cmd::byString($this->getConfiguration('cmdPresent'));
+						if(is_object($cmd))
+							$isPresent = $cmd->execCmd();
+						log::add('Volets','debug',$this->getHumanName().' : test absent :'.$isPresent);
+					}
+					if($isPresent)
+						$this->GestionJour();
+					else
+						$this->GestionAbsent();
+				}
 				else
+				{ // la nuit
 					$this->GestionNuit();
+				}
 			}
 			else
 			{ //si on pas armé, on test pour le réarmement auto.
@@ -218,26 +217,23 @@ class Volets extends eqLogic {
 
 	public function GestionJour()
 	{
-		if($this->getCmd(null,'gestion')->execCmd() != 'Absent')
-		{ //si on est pas Absent
-			$Saison=$this->getSaison();
-			if($this->getConfiguration('Meteo') && $this->checkCondition('close',$Saison,'Meteo')) //gestion météo
+		$Saison=$this->getSaison();
+		if($this->getConfiguration('Meteo') && $this->checkCondition('close',$Saison,'Meteo')) //gestion météo
+		{
+			$this->CheckRepetitive('Meteo','close',$Saison);
+		}
+		else if($this->getConfiguration('Azimut')) //gestion Azimut
+		{
+			$Azimut = cache::byKey('Volets::Azimut::'.$this->getId())->getValue(0);
+			$Evenement=$this->SelectAction($Azimut,$Saison);
+			if($this->checkCondition($Evenement,$Saison,'Azimut'))
+				$this->CheckRepetitive('Azimut',$Evenement,$Saison);
+		}
+		else if($this->getConfiguration('Jour')) //gestion jour
+		{ //si la gestion de la jour est activée
+			if($this->checkCondition('open',$Saison,'Jour')) //check des conditions
 			{
-				$this->CheckRepetitive('Meteo','close',$Saison);
-			}
-			else if($this->getConfiguration('Azimut')) //gestion Azimut
-			{
-				$Azimut = cache::byKey('Volets::Azimut::'.$this->getId())->getValue(0);
-				$Evenement=$this->SelectAction($Azimut,$Saison);
-				if($this->checkCondition($Evenement,$Saison,'Azimut'))
-					$this->CheckRepetitive('Azimut',$Evenement,$Saison);
-			}
-			else if($this->getConfiguration('Jour')) //gestion jour
-			{ //si la gestion de la jour est activée
-				if($this->checkCondition('open',$Saison,'Jour')) //check des conditions
-				{
-					$this->CheckRepetitive('Jour','open',$Saison);
-				}
+				$this->CheckRepetitive('Jour','open',$Saison);
 			}
 		}
 	}
