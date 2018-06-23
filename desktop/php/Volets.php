@@ -214,7 +214,7 @@ $eqLogics = eqLogic::byType('Volets');
 								<div class="input-group">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="RealState" placeholder="{{Commande déterminant l'état du volet}}"/>
 									<span class="input-group-btn">
-										<a class="btn btn-success btn-sm listCmdAction data-type="info">
+										<a class="btn btn-success btn-sm listCmdAction" data-type="info">
 											<i class="fa fa-list-alt"></i>
 										</a>
 									</span>
@@ -265,7 +265,7 @@ $eqLogics = eqLogic::byType('Volets');
 										<!--a class="btn btn-success btn-sm listAction" title="Sélectionner un mot-clé">
 											<i class="fa fa-tasks"></i>
 										</a-->
-										<a class="btn btn-success btn-sm listCmdAction data-type="info">
+										<a class="btn btn-success btn-sm listCmdAction" data-type="info">
 											<i class="fa fa-list-alt"></i>
 										</a>
 									</span>
@@ -411,6 +411,18 @@ $eqLogics = eqLogic::byType('Volets');
 							<label class="col-sm-2 control-label">{{ Et }}</label>
 							<div class="col-sm-3">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="AngleGauche" disabled />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">{{Ratio d'ouverture}}
+								<sup>
+									<i class="fa fa-question-circle tooltips" title="{{Ce paramètre permet d'appliquer un ratio sur l'ouverture proportionnel.}}"></i>
+								</sup>
+							</label>
+							<div class="col-sm-5">
+								<div class="input-group">
+									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ratioOuverture" placeholder="{{1 par defaut}}"/>
+								</div>
 							</div>
 						</div>
 						<input type="hidden" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="Droite"/>

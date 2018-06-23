@@ -158,6 +158,7 @@ class Volets extends eqLogic {
 			$this->GestionManuel($State);
 		}
 		$this->setPosition($State);
+		$this->checkAndUpdateCmd('RatioVertical',$Value);
 	}
 
 	public function execGestionVolet()
@@ -606,6 +607,7 @@ class Volets extends eqLogic {
 			else
 		    $zenith = $heliotrope->getConfiguration('zenith', '');
 			$Hauteur=round($AltitudeSoleil*100/$zenith);
+			$Hauteur = round($Hauteur * $this->getConfiguration('ratioOuverture'));
 			log::add('Volets','info',$this->getHumanName().'[Gestion Altitude] : L\'altitude actuel est a '.$Hauteur.'% par rapport au zenith');
 			return $Hauteur;
 		}
@@ -783,6 +785,10 @@ class Volets extends eqLogic {
 				{
 					if(!is_array($this->getConfiguration('Centre')))
 						$this->setConfiguration('Centre',$GeoLoc);
+				}
+				if($this->getConfiguration('ratioOuverture') == '')
+				{
+						$this->setConfiguration('ratioOuverture','1');
 				}
 			}
 		}
