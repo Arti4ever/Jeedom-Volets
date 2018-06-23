@@ -416,7 +416,7 @@ $eqLogics = eqLogic::byType('Volets');
 						<div class="form-group">
 							<label class="col-sm-2 control-label">{{Ratio d'ouverture}}
 								<sup>
-									<i class="fa fa-question-circle tooltips" title="{{Ce paramètre permet d'appliquer un ratio sur l'ouverture proportionnel.}}"></i>
+									<i class="fa fa-question-circle tooltips" title="{{Ce paramètre permet d'appliquer un ratio sur l'ouverture proportionnel.(uniquement l'été et quand le soleil est dans la fenêtre)}}"></i>
 								</sup>
 							</label>
 							<div class="col-sm-5">
