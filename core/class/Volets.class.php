@@ -399,7 +399,8 @@ class Volets extends eqLogic {
 	{
 		$this->checkAndUpdateCmd('gestion',$Gestion); //mise a jour de la gestion
 		$RatioVertical=$this->getHauteur($Gestion,$Evenement,$Saison);
-		if($this->getCmd(null,'RatioVertical')->execCmd() == $RatioVertical)
+		$incrementMvt = 2;
+		if($RatioVertical < ($this->getCmd(null,'RatioVertical')->execCmd() + $incrementMvt) && $RatioVertical > ($this->getCmd(null,'RatioVertical')->execCmd() - $incrementMvt))
 		{
 			log::add('Volets', 'info',$this->getHumanName().'[Gestion '.$Gestion.'] : Exécution annulée, le volet est déja à la bonne position ');
 			return; //si deja à la position on fait rien
