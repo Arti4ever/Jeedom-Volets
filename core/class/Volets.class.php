@@ -764,14 +764,27 @@ class Volets extends eqLogic {
 			$heliotrope=eqlogic::byId($this->getConfiguration('heliotrope'));
 			if(is_object($heliotrope))
 			{
-				if($heliotrope->getConfiguration('geoloc') == "")
-					throw new Exception(__('Impossible d\'enregister, la configuration  heliotrope n\'est pas correcte', __FILE__));
-				$geoloc = geotravCmd::byEqLogicIdAndLogicalId($heliotrope->getConfiguration('geoloc'),'location:coordinate');
-				if(is_object($geoloc) && $geoloc->execCmd() == '')
-					throw new Exception(__('Impossible d\'enregister, la configuration de  "Localisation et trajet" (geotrav) n\'est pas correcte', __FILE__));
-				$center=explode(",",$geoloc->execCmd());
-				$GeoLoc['lat']=$center[0];
-				$GeoLoc['lng']=$center[1];
+				//on cherche si la les donnees de geoloc sont renseigner dans jeedom
+				$GeoLoc['lat']=config::byKey('info::latitude');
+				$GeoLoc['lng']=config::byKey('info::longitude');
+				if($GeoLoc['lat'] == '' || $GeoLoc['lng'] == '')	
+				{ // la config dans jeedom n'est pas bonne, on cherche dans geotrav (pour la compatibilité)
+					$geotrav=eqlogic::byId($this->getConfiguration('geotrav'));
+					if(is_object($geotrav))
+					{
+						if($heliotrope->getConfiguration('geoloc') == "")
+							throw new Exception(__('Impossible d\'enregister, la configuration  heliotrope n\'est pas correcte', __FILE__));
+						$geoloc = geotravCmd::byEqLogicIdAndLogicalId($heliotrope->getConfiguration('geoloc'),'location:coordinate');
+						if(is_object($geoloc) && $geoloc->execCmd() == '')	
+							throw new Exception(__('Impossible d\'enregistrer, la configuration de  "Localisation et trajet" (geotrav) n\'est pas correcte', __FILE__));
+						$center=explode(",",$geoloc->execCmd());
+						$GeoLoc['lat']=$center[0];
+						$GeoLoc['lng']=$center[1];
+					}
+					else
+						throw new Exception(__('Impossible d\'enregistrer, la configuration de  "longitude" ou "longitude" n\'est pas correcte', __FILE__));			
+				}
+
 				if($this->getConfiguration('Droite') != '')
 				{
 					if(!is_array($this->getConfiguration('Droite')))

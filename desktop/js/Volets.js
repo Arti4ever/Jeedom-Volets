@@ -157,11 +157,11 @@ function addCondition(_condition,_el) {
 			.append($('<div class="input-group">')
 				.append($('<span class="input-group-btn">')
 					.append($('<a class="btn btn-default conditionAttr btn-sm" data-action="remove">')
-						.append($('<i class="fa fa-minus-circle">'))))
+						.append($('<i class="fas fa-minus-circle">'))))
 				.append($('<input class="expressionAttr form-control input-sm cmdCondition" data-l1key="expression"/>'))
 				.append($('<span class="input-group-btn">')
 					.append($('<a class="btn btn-warning btn-sm listCmdCondition">')
-						.append($('<i class="fa fa-list-alt">'))))))
+						.append($('<i class="fas fa-list-alt">'))))))
 		.append(addParameters());
 
         _el.append(tr);
@@ -194,13 +194,13 @@ function addAction(_action,  _el) {
 		.append($('<div class="input-group">')
 			.append($('<span class="input-group-btn">')
 				.append($('<a class="btn btn-default ActionAttr btn-sm" data-action="remove">')
-					.append($('<i class="fa fa-minus-circle">'))))
+					.append($('<i class="fas fa-minus-circle">'))))
 			.append($('<input class="expressionAttr form-control input-sm cmdAction" data-l1key="cmd"/>'))
 			.append($('<span class="input-group-btn">')
 				.append($('<a class="btn btn-success btn-sm listAction" title="Sélectionner un mot-clé">')
-					.append($('<i class="fa fa-tasks">')))
+					.append($('<i class="fas fa-tasks">')))
 				.append($('<a class="btn btn-success btn-sm listCmdAction data-type="action"">')
-					.append($('<i class="fa fa-list-alt">')))))
+					.append($('<i class="fas fa-list-alt">')))))
 		.append($('<div class="actionOptions">')
 	       		.append($(jeedom.cmd.displayActionOption(init(_action.cmd, ''), _action.options)))));
 	tr.append(addParameters());
@@ -389,25 +389,25 @@ function addCmdToTable(_cmd) {
 				.append($('<input type="checkbox" class="cmdAttr checkbox-inline" data-size="mini" data-label-text="{{Historiser}}" data-l1key="isHistorized"/>'))
 				.append('{{Historiser}}')
 				.append($('<sup>')
-					.append($('<i class="fa fa-question-circle tooltips" style="font-size : 1em;color:grey;">')
+					.append($('<i class="fas fa-question-circle tooltips" style="font-size : 1em;color:grey;">')
 					.attr('title','Souhaitez-vous historiser les changements de valeurs ?')))))
 		.append($('<span>')
 			.append($('<label class="checkbox-inline">')
 				.append($('<input type="checkbox" class="cmdAttr checkbox-inline" data-size="mini" data-label-text="{{Afficher}}" data-l1key="isVisible" checked/>'))
 				.append('{{Afficher}}')
 				.append($('<sup>')
-					.append($('<i class="fa fa-question-circle tooltips" style="font-size : 1em;color:grey;">')
+					.append($('<i class="fas fa-question-circle tooltips" style="font-size : 1em;color:grey;">')
 					.attr('title','Souhaitez-vous afficher cette commande sur le dashboard ?')))))
 		.append($('<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="minValue" placeholder="{{Min}}" title="{{Min}}" >'))
 		.append($('<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="maxValue" placeholder="{{Max}}" title="{{Max}}" >')));
 	var parmetre=$('<td>');
 	if (is_numeric(_cmd.id)) {
 		parmetre.append($('<a class="btn btn-default btn-xs cmdAction" data-action="test">')
-			.append($('<i class="fa fa-rss">')
+			.append($('<i class="fas fa-rss">')
 				.text('{{Tester}}')));
 	}
 	parmetre.append($('<a class="btn btn-default btn-xs cmdAction tooltips" data-action="configure">')
-		.append($('<i class="fa fa-cogs">')));
+		.append($('<i class="fas fa-cogs">')));
 	tr.append(parmetre);
 	$('#table_cmd tbody').append(tr);
 	$('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
