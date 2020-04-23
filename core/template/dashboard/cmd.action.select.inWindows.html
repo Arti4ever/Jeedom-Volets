@@ -1,7 +1,9 @@
-<div style="width:90px;min-height:80px;" class="cmd tooltips cmd-widget cursor" data-type="action" data-subtype="select" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+<div style="width:90px;min-height:60px;" class="cmd tooltips cmd-widget cursor" data-type="action" data-subtype="select" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
     <center>
         <div style="font-weight: bold;font-size : 12px;#hideCmdName#">#valueName#</div>
-        <img class="action iconCmd" src="plugins/Volets/core/template/images/Open.png" width="40px">
+        <div class="content-sm action iconCmd" >
+            <i class="icon jeedom-volet-ouvert" ></i>
+        </div>
     </center>
     <script>
         jeedom.cmd.update['#id#'] = function(_options){
@@ -10,14 +12,14 @@
                     $('.cmd[data-cmd_id=#id#]').hide();
                 }else{
                     $('.cmd[data-cmd_id=#id#]').show();
-                    $('.cmd[data-cmd_id=#id#] .iconCmd').empty().attr('src','plugins/Volets/core/template/images/ModeOpen.png').attr('data-value',0);
+                    $('.cmd[data-cmd_id=#id#] .iconCmd').empty().append('<i class="icon jeedom-volet-ouvert" ></i><i class="fas fa-sun" style="font-size: 20px;vertical-align: top;margin-left: 5px;"></i>').attr('data-value',0);
                 }
             } else {
                 if (jeedom.cmd.normalizeName('#name#') == 'off') {
                     $('.cmd[data-cmd_id=#id#]').hide();
                 }else{
                     $('.cmd[data-cmd_id=#id#]').show();
-                    $('.cmd[data-cmd_id=#id#] .iconCmd').empty().attr('src','plugins/Volets/core/template/images/ModeClose.png').attr('data-value',1);
+                    $('.cmd[data-cmd_id=#id#] .iconCmd').empty().append('<i class="icon jeedom-volet-ferme" ></i><i class="fas fa-sun" style="font-size: 20px;vertical-align: top;margin-left: 5px;"></i>').attr('data-value',1);
                 }
             }
         }

@@ -1,15 +1,15 @@
 <div style="width:90px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
     <center>
         <div style="font-weight: bold;font-size : 12px;#hideCmdName#">#name_display#</div>
-            <img class="iconCmd" src="plugins/Volets/core/template/images/SunInWindows.png" width="40px">
+        <div class="content-sm action iconCmd" ></div>
     </center>
     <script>
         jeedom.cmd.update['#id#'] = function(_options){
             $('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate)
             if (_options.display_value == '1') {
-             $('.cmd[data-cmd_id=#id#] .iconCmd').empty().attr('src','plugins/Volets/core/template/images/SunInWindows.png');
+                $('.cmd[data-cmd_id=#id#] .iconCmd').empty().append('<span class="fa-stack"><i class="icon jeedom-volet-ouvert fa-stack-2x" ></i><i class="fas fa-sun fa-stack-1x" style="margin-top: 5px;"></i></span>');
          }else {
-            $('.cmd[data-cmd_id=#id#] .iconCmd').empty().attr('src','plugins/Volets/core/template/images/SunOutWindows.png');
+            $('.cmd[data-cmd_id=#id#] .iconCmd').empty().append('<i class="icon jeedom-volet-ouvert" ></i>');
         }
     }
     jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
